@@ -1,12 +1,18 @@
 import random
 import sys
+import os
 
 dictionary = ["PIZZA", "PANCAKES", "GOLF"]
 randomWord = dictionary[random.randrange(0, len(dictionary))]
 
 blankArray = []
 
+def cls():
+    clear = "\n" * 100
+    print(clear)
+
 def startup(time):
+    cls()
     if time == "initial":
         for i in range(1, len(randomWord) + 1):
             blankArray.append("_")
@@ -19,6 +25,7 @@ def guess(letter):
         if letter == randomWord[i]:
             blankArray[i] = letter
     if randomWord == "".join(blankArray):
+        cls()
         print("You Win!")
         print("The word was: %s" % " ".join(blankArray))
         sys.exit()
