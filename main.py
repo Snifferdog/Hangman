@@ -4,6 +4,7 @@ import os
 
 dictionary = ["PIZZA", "PANCAKES", "GOLF","JASPER","ISAAC","SCOTT"] #Add words here, make sure they're all caps
 randomWord = dictionary[random.randrange(0, len(dictionary))]
+usedArray = []
 
 blankArray = []
 
@@ -16,6 +17,8 @@ def startup(time):
     if time == "initial":
         for i in range(1, len(randomWord) + 1):
             blankArray.append("_")
+    used = " ".join(usedArray)
+    print("You have used: %s" % used)
     print(" ".join(blankArray))
     letterToGuess = raw_input("Pick one letter: ").upper()
     guess(letterToGuess)
@@ -25,6 +28,7 @@ def guess(letter):
         if letter == randomWord[i]:
 			#Replacing the blanks with letters
             blankArray[i] = letter
+    usedArray.append(letter)
     if randomWord == "".join(blankArray):
 		#When the user wins
         cls()
