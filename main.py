@@ -2,7 +2,7 @@ import random
 import sys
 import os
 
-dictionary = ["PIZZA", "PANCAKES", "GOLF"]
+dictionary = ["PIZZA", "PANCAKES", "GOLF","JASPER","ISAAC","SCOTT"]
 randomWord = dictionary[random.randrange(0, len(dictionary))]
 
 blankArray = []
