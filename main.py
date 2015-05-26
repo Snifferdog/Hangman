@@ -12,18 +12,26 @@ def cls():
     clear = "\n" * 100
     print(clear)
 
-def startup(time):
+def startup(time, incorrect):
     cls()
     if time == "initial":
         for i in range(1, len(randomWord) + 1):
             blankArray.append("_")
-    used = " ".join(usedArray)
-    print("You have used: %s" % used)
-    print(" ".join(blankArray))
-    letterToGuess = raw_input("Pick one letter: ").upper()
-    guess(letterToGuess)
+    else:
+        if incorrect:
+            print("Incorrect!")
+        used = " ".join(usedArray)
+        print("You have used: %s" % used)
+        print(" ".join(blankArray))
+    typeOfGuess = raw_input("Letter | Word ")
+    if typeOfGuess == "Letter" or typeOfGuess == "letter":
+        letterToGuess = raw_input("Pick one letter: ").upper()
+        guessLetter(letterToGuess)
+    if typeOfGuess == "Word" or typeOfGuess == "word":
+        wordToGuess = raw_input("Type a word: ").upper()
+        guessWord(wordToGuess)
 
-def guess(letter):
+def guessLetter(letter):
     for i in range(0, len(list(randomWord))):
         if letter == randomWord[i]:
 			#Replacing the blanks with letters
@@ -40,7 +48,18 @@ def guess(letter):
             if randomWord[i] == "_":
                 break
             else:
-                startup("")
+                startup("", False)
 
-startup("initial")
+def guessWord(word):
+    if word == randomWord:
+        winWord = " ".join(list(randomWord.upper()))
+        cls()
+        print("You Win!")
+        print("The word was: " + winWord)
+        sys.exit()
+    else:
+        print("%s is not the word!" % word)
+        startup("", True)
+
+startup("initial", False)
 
