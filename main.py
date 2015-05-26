@@ -2,7 +2,7 @@ import random
 import sys
 import os
 
-dictionary = ["PIZZA", "PANCAKES", "GOLF","JASPER","ISAAC","SCOTT"]
+dictionary = ["PIZZA", "PANCAKES", "GOLF","JASPER","ISAAC","SCOTT"] #Add words here, make sure they're all caps
 randomWord = dictionary[random.randrange(0, len(dictionary))]
 
 blankArray = []
@@ -23,8 +23,10 @@ def startup(time):
 def guess(letter):
     for i in range(0, len(list(randomWord))):
         if letter == randomWord[i]:
+			#Replacing the blanks with letters
             blankArray[i] = letter
     if randomWord == "".join(blankArray):
+		#When the user wins
         cls()
         print("You Win!")
         print("The word was: %s" % " ".join(blankArray))
