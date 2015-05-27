@@ -1,13 +1,13 @@
 import random
 import sys
 import os
+from time import sleep
 
 dictionary = ["PIZZA", "PANCAKES", "GOLF","JASPER","ISAAC","SCOTT"] #Add words here, make sure they're all caps
 randomWord = dictionary[random.randrange(0, len(dictionary))]
 usedArray = []
 global lives
 lives = 0
-
 blankArray = []
 
 def cls():
@@ -40,9 +40,13 @@ def startup(time, incorrect):
     if typeOfGuess == "Letter" or typeOfGuess == "letter":
         letterToGuess = raw_input("Pick one letter: ").upper()
         guessLetter(letterToGuess)
-    if typeOfGuess == "Word" or typeOfGuess == "word":
+    elif typeOfGuess == "Word" or typeOfGuess == "word":
         wordToGuess = raw_input("Type a word: ").upper()
         guessWord(wordToGuess)
+    else:
+        print("Error: Unknown")
+        sleep(3)
+        startup("", False)
 
 def guessLetter(letter):
     global letterExists
