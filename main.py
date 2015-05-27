@@ -5,6 +5,8 @@ import os
 dictionary = ["PIZZA", "PANCAKES", "GOLF","JASPER","ISAAC","SCOTT"] #Add words here, make sure they're all caps
 randomWord = dictionary[random.randrange(0, len(dictionary))]
 usedArray = []
+global lives
+lives = 0
 
 blankArray = []
 
@@ -17,10 +19,21 @@ def startup(time, incorrect):
     if time == "initial":
         for i in range(1, len(randomWord) + 1):
             blankArray.append("_")
+        amountOfLives = input("Amount of lives: ")
+        cls()
+        global lives
+        lives = amountOfLives
     else:
         if incorrect:
+            print(lives)
             print("Incorrect!")
+            lives = lives - 1
+            if lives == 0:
+                cls()
+                print("Game Over! You ran out of lives!")
+                sys.exit()
         used = " ".join(usedArray)
+        print("You have " + lives.__str__() + " live(s) left")
         print("You have used: %s" % used)
         print(" ".join(blankArray))
     typeOfGuess = raw_input("Letter | Word ")
@@ -32,10 +45,13 @@ def startup(time, incorrect):
         guessWord(wordToGuess)
 
 def guessLetter(letter):
+    global letterExists
+    letterExists = False
     for i in range(0, len(list(randomWord))):
         if letter == randomWord[i]:
-			#Replacing the blanks with letters
+		    #Replacing the blanks with letters
             blankArray[i] = letter
+            letterExists = True
     usedArray.append(letter)
     if randomWord == "".join(blankArray):
 		#When the user wins
@@ -48,7 +64,10 @@ def guessLetter(letter):
             if randomWord[i] == "_":
                 break
             else:
-                startup("", False)
+                if letterExists:
+                    startup("", False)
+                else:
+                    startup("", True)
 
 def guessWord(word):
     if word == randomWord:
