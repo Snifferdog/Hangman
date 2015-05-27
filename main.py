@@ -30,17 +30,18 @@ def startup(time, incorrect):
             lives = lives - 1
             if lives == 0:
                 cls()
+                print("The word was: %s" % " ".join(randomWord))
                 print("Game Over! You ran out of lives!")
                 sys.exit()
         used = " ".join(usedArray)
         print("You have " + lives.__str__() + " live(s) left")
         print("You have used: %s" % used)
         print(" ".join(blankArray))
-    typeOfGuess = raw_input("Letter | Word ")
-    if typeOfGuess == "Letter" or typeOfGuess == "letter":
+    typeOfGuess = raw_input("< Letter | Word >")
+    if typeOfGuess == "Letter" or typeOfGuess == "letter" or typeOfGuess == "L" or typeOfGuess == "l":
         letterToGuess = raw_input("Pick one letter: ").upper()
         guessLetter(letterToGuess)
-    elif typeOfGuess == "Word" or typeOfGuess == "word":
+    elif typeOfGuess == "Word" or typeOfGuess == "word" or typeOfGuess == "w" or typeOfGuess == "W":
         wordToGuess = raw_input("Type a word: ").upper()
         guessWord(wordToGuess)
     else:
